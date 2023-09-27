@@ -7,19 +7,8 @@ async function handleClick() {
   const title_value = title_element.value;
   const content_value = content_element.value;
 
-  const response = await fetch("http://127.0.0.1:8000/articles/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: title_value,
-      content: content_value,
-    }),
-  });
-
-  const data = await response.json();
-  console.log(data);
+  const response = await postArticle(title_value, content_value);
+  console.log(response);
 
   location.href = "/index.html";
 }

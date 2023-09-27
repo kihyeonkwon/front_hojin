@@ -5,8 +5,8 @@ async function handleClick() {
 }
 
 async function loadArticles() {
-  const response = await fetch("http://127.0.0.1:8000/articles/");
-  const data = await response.json();
+  const data = await getArticles();
+
   console.log(data);
 
   const articlelist = document.querySelector("#article-list");
