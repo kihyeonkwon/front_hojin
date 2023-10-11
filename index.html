@@ -4,19 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Web</title>
-    <script src="/api.js"></script>
-    <script src="/script.js"></script>
   </head>
   <body>
-    <h1>안녕하세요!</h1>
+    <h1>안녕하세요! <span id="username"></span></h1>
     <div>조금 편하게 개발을 해봅시다!</div>
     <button type="button" onclick="handleClick()">클릭클릭!!</button>
     <div id="article-list">
       <a href="/create_article.html"> 글 작성하러 가기 </a>
+      <a href="/signup.html">회원가입하러 가기 </a>
+      <a href="/login.html">로그인하러 가기 </a>
+      <button id="logout-btn">로그아웃 하기</button>
       <div>
         <h3>제목</h3>
         <p>내용</p>
       </div>
     </div>
+    <script src="/api.js"></script>
+    <script src="/index.js"></script>
   </body>
 </html>
