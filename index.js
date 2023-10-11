@@ -30,9 +30,14 @@ async function loadArticles() {
   data.forEach((element) => {
     const newdiv = document.createElement("div");
 
+    const a = document.createElement("a");
+    a.href = `/detail.html?id=${element.id}`;
+
     const newh3 = document.createElement("h3");
     newh3.innerText = element.title;
-    articlelist.appendChild(newh3);
+
+    a.appendChild(newh3);
+    articlelist.appendChild(a);
 
     const newp = document.createElement("p");
     newp.innerText = element.content;
