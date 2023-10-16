@@ -3,8 +3,8 @@ console.log("스크립트 실행중!");
 const logoutButton = document.querySelector("#logout-btn");
 logoutButton.addEventListener("click", handleLogout);
 
-async function handleClick() {
-  alert("버튼이 클릭되었습니다.");
+async function handleClick(z, x) {
+  alert(`전달된 파라미터는 ${z}와 ${x} 입니다.`);
 }
 
 async function loadUser() {
@@ -21,26 +21,26 @@ async function loadUser() {
 }
 
 async function loadArticles() {
-  const data = await getArticles();
+  const articles = await getArticles();
 
-  console.log(data);
+  console.log(articles);
 
   const articlelist = document.querySelector("#article-list");
 
-  data.forEach((element) => {
+  articles.forEach((article) => {
     const newdiv = document.createElement("div");
 
     const a = document.createElement("a");
-    a.href = `/detail.html?id=${element.id}`;
+    a.href = `/detail.html?id=${article.id}`;
 
     const newh3 = document.createElement("h3");
-    newh3.innerText = element.title;
+    newh3.innerText = article.title;
 
     a.appendChild(newh3);
     articlelist.appendChild(a);
 
     const newp = document.createElement("p");
-    newp.innerText = element.content;
+    newp.innerText = article.content;
     newdiv.appendChild(newp);
 
     articlelist.appendChild(newdiv);

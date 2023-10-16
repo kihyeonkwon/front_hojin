@@ -27,13 +27,24 @@ async function loadArticle() {
   const created_at = document.createElement("p");
   created_at.textContent = data.created_at;
 
+  const user = document.createElement("p");
+  user.textContent = data.user;
+
   const updated_at = document.createElement("p");
   updated_at.textContent = data.updated_at;
+
+  if (data.image == null) {
+  } else {
+    const image = document.createElement("img");
+    image.src = base_url + data.image;
+    article.appendChild(image);
+  }
 
   article.appendChild(title);
   article.appendChild(content);
   article.appendChild(created_at);
   article.appendChild(updated_at);
+  article.appendChild(user);
 }
 
 loadArticle();
