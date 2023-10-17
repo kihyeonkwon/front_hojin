@@ -9,18 +9,14 @@ async function getArticles() {
   return data;
 }
 
-async function postArticle(title_value, content_value) {
+async function postArticle(formData) {
   const accessToken = localStorage.getItem("accessToken");
   const response = await fetch(`${base_url}/articles/`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
     },
-    body: JSON.stringify({
-      title: title_value,
-      content: content_value,
-    }),
+    body: formData,
   });
 
   const data = await response.json();

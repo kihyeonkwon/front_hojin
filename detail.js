@@ -40,11 +40,34 @@ async function loadArticle() {
     article.appendChild(image);
   }
 
+  const commentSection = document.createElement("div");
+
+  const comments_list = data.comments;
+
+  comments_list.forEach((comment) => {
+    console.log(comment);
+    console.log(comment.content);
+    console.log(comment.user.email);
+
+    const commentDiv = document.createElement("div");
+    const content = document.createElement("p");
+    content.textContent = comment.content;
+
+    const user = document.createElement("p");
+    user.textContent = comment.user.email;
+
+    commentDiv.appendChild(content);
+    commentDiv.appendChild(user);
+
+    commentSection.appendChild(commentDiv);
+  });
+
   article.appendChild(title);
   article.appendChild(content);
   article.appendChild(created_at);
   article.appendChild(updated_at);
   article.appendChild(user);
+  article.appendChild(commentSection);
 }
 
 loadArticle();
