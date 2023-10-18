@@ -1,10 +1,56 @@
 console.log("detail.js 실행중!");
 
+const commentSubmitBtn = document.querySelector("#comment-submit");
+commentSubmitBtn.addEventListener("click", handleCommentSubmit);
+
 function getId() {
   const urlParams = new URLSearchParams(window.location.search);
   const myParam = urlParams.get("id");
 
   return myParam;
+}
+
+async function loadComments() {
+  const id = getId();
+  const comments_list = await getComments(id);
+
+  const commentSection = document.querySelector("#comment-section");
+  commentSection.innerHTML = "";
+
+  comments_list.forEach((comment) => {
+    console.log(comment);
+    console.log(comment.content);
+    console.log(comment.user.email);
+
+    const commentDiv = document.createElement("div");
+    commentDiv.className = "comment";
+
+    const content = document.createElement("p");
+    content.textContent = comment.content;
+
+    const user = document.createElement("p");
+    user.textContent = comment.user.email;
+
+    commentDiv.appendChild(content);
+    commentDiv.appendChild(user);
+
+    commentSection.appendChild(commentDiv);
+  });
+}
+
+async function handleCommentSubmit() {
+  const commentInputElement = document.querySelector("#comment-input");
+  const commentInputValue = commentInputElement.value;
+  const id = getId();
+
+  const response = await postComment(id, commentInputValue);
+
+  console.log(response);
+
+  commentInputElement.value = "";
+
+  //refresh
+  location.reload();
 }
 
 async function loadArticle() {
@@ -40,9 +86,9 @@ async function loadArticle() {
     article.appendChild(image);
   }
 
-  const commentSection = document.createElement("div");
-
   const comments_list = data.comments;
+
+  const commentSection = document.querySelector("#comment-section");
 
   comments_list.forEach((comment) => {
     console.log(comment);
@@ -50,6 +96,8 @@ async function loadArticle() {
     console.log(comment.user.email);
 
     const commentDiv = document.createElement("div");
+    commentDiv.className = "comment";
+
     const content = document.createElement("p");
     content.textContent = comment.content;
 

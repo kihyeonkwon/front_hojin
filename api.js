@@ -24,6 +24,33 @@ async function postArticle(formData) {
   return data;
 }
 
+async function getComments(articleId) {
+  const response = await fetch(`${base_url}/articles/${articleId}/comment/`);
+
+  const data = await response.json();
+
+  return data;
+}
+
+async function postComment(articleId, content) {
+  const accessToken = localStorage.getItem("accessToken");
+
+  const response = await fetch(`${base_url}/articles/${articleId}/comment/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      content: content,
+    }),
+  });
+
+  const data = await response.json();
+
+  return data;
+}
+
 async function postSignup(data) {
   const res = await fetch(`${base_url}/users/`, {
     method: "POST",
