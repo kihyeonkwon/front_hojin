@@ -24,6 +24,31 @@ async function postArticle(formData) {
   return data;
 }
 
+async function putArticle(articleId, formData) {
+  const accessToken = localStorage.getItem("accessToken");
+  const response = await fetch(`${base_url}/articles/${articleId}/`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: formData,
+  });
+
+  return response;
+}
+
+async function deleteArticle(articleId) {
+  const accessToken = localStorage.getItem("accessToken");
+  const response = await fetch(`${base_url}/articles/${articleId}/`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  return response;
+}
+
 async function getComments(articleId) {
   const response = await fetch(`${base_url}/articles/${articleId}/comment/`);
 
@@ -49,6 +74,18 @@ async function postComment(articleId, content) {
   const data = await response.json();
 
   return data;
+}
+
+async function deleteComment(commentId) {
+  const accessToken = localStorage.getItem("accessToken");
+  const response = await fetch(`${base_url}/articles/comment/${commentId}/`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  return response;
 }
 
 async function postSignup(data) {
